@@ -1,0 +1,43 @@
+name: venflix
+description: A new Flutter project.
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  chips_choice: ^2.0.1 
+  font_awesome_flutter: ^8.11.0
+  cupertino_icons: ^1.0.0
+  http: ^0.12.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+      - Images/undraw_develop_app_re_bi4i.png
+
+
+
+  fonts:
+   
+    - family: Proxima Nova
+      fonts:
+        - asset: Fonts/ProximaNova-Regular.otf  
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
