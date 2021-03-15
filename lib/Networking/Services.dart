@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
+import 'package:venflix/Models/genre_Model.dart';
+
 import 'dart:convert';
-import 'package:venflix/Networking/GenreModel.dart';
+import 'package:venflix/Models/trending_Model.dart';
 
 class Api {
   var httpClient = http.Client();
@@ -14,14 +16,30 @@ class Api {
     if (response.statusCode == 200) {
       final parsed =
           json.decode(response.body)["results"].cast<Map<String, dynamic>>();
-      print(parsed);
+
       return parsed
           .map<PopularMoviesModel>((json) => PopularMoviesModel.fromJson(json))
           .toList();
     } else {
-        print(response.statusCode);
+      print(response.statusCode);
       throw Exception("Failed to load popular movies");
-    
+    }
+  }
+
+  // ignore: non_constant_identifier_names
+  Future<List<GenreModel>> GenreMovies() async {
+    final response = await http.get("$url/movie/popular?api_key=$apiKey");
+
+    if (response.statusCode == 200) {
+      final parsed =
+          json.decode(response.body)["Genre"].cast<Map<String, dynamic>>();
+
+      return parsed
+          .map<GenreModel>((json) => GenreModel.fromjson(json))
+          .toList();
+    } else {
+      print(response.statusCode);
+      throw Exception("Failed to load popular movies");
     }
   }
 }
