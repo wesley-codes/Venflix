@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:venflix/Models/genre_Model.dart';
+import 'package:venflix/Models/moviemodel.dart';
 
 import 'dart:convert';
 import 'package:venflix/Models/trending_Model.dart';
@@ -40,6 +41,16 @@ class Api {
     } else {
       print(response.statusCode);
       throw Exception("Failed to load popular movies");
+    }
+  }
+
+  Future<MovieModel> getMovieInfo(int movieId) async {
+    final response = await http.get("$url/movie/$movieId?api_key=$apiKey");
+
+    if (response.statusCode == 200) {
+      return MovieModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load Movie Information');
     }
   }
 }

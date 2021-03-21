@@ -9,12 +9,12 @@ class PopularMoviesModel {
   // ignore: non_constant_identifier_names
   final String poster_path;
 // ignore: non_constant_identifier_names
+  final int id;
 
   PopularMoviesModel(
       // ignore: non_constant_identifier_names
       {
     this.original_title,
-    
     this.overview,
     // ignore: non_constant_identifier_names
     this.release_date,
@@ -25,10 +25,12 @@ class PopularMoviesModel {
     this.popularity,
     // ignore: non_constant_identifier_names
     this.vote_count,
+    this.id
   });
 
   factory PopularMoviesModel.fromJson(Map<String, dynamic> json) {
     return PopularMoviesModel(
+      id: json["id"],
         original_title: json["original_title"],
         overview: json["overview"],
         release_date: json["release_date"],

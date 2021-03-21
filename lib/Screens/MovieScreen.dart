@@ -143,7 +143,7 @@ class _MovieScreenState extends State<MovieScreen> {
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
+                      itemBuilder: (BuildContext context, int id) {
                         return Padding(
                           padding: const EdgeInsets.only(left: 15),
                           child: AspectRatio(
@@ -151,78 +151,68 @@ class _MovieScreenState extends State<MovieScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Row(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MovieDetail(
-                                              snapshotImage: getImagePoster(
-                                                  snapshot
-                                                      .data[index].poster_path),
-                                              snapshotMovieName: snapshot
-                                                  .data[index].original_title,
-                                              snapshotRating: snapshot
-                                                  .data[index].vote_average,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(top: 25),
-                                        width: MediaQuery.maybeOf(context)
-                                                .size
-                                                .width /
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MovieDetail(
+                                            snapshotImage: getImagePoster(
+                                                snapshot.data[id].poster_path),
+                                            snapshotMovieName: snapshot
+                                                .data[id].original_title,
+                                            snapshotRating:
+                                                snapshot.data[id].vote_average,
+                                            id: snapshot.data[id].id),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(top: 25),
+                                    width:
+                                        MediaQuery.maybeOf(context).size.width /
                                             1.7,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                          child: Image.network(
-                                            getImagePoster(snapshot
-                                                .data[index].poster_path),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      child: Image.network(
+                                        getImagePoster(
+                                            snapshot.data[id].poster_path),
 // ignore: missing_return
-                                            loadingBuilder:
-                                                // ignore: missing_return
-                                                (BuildContext context,
-                                                    child,
-                                                    ImageChunkEvent
-                                                        loadingProgress) {
-                                              if (loadingProgress == null)
-                                                return child;
-                                              return Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              );
-                                            },
-                                            // ignore: non_constant_identifier_names
-                                            errorBuilder:
-                                                (context, error, StackTrace) =>
-                                                    Text("An error occurred!"),
-                                          ),
-                                        ),
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.5),
+                                        loadingBuilder:
+                                            // ignore: missing_return
+                                            (BuildContext context,
+                                                child,
+                                                ImageChunkEvent
+                                                    loadingProgress) {
+                                          if (loadingProgress == null)
+                                            return child;
+                                          return Center(
+                                            child: CircularProgressIndicator(),
+                                          );
+                                        },
 
-                                              // changes position of shadow
-                                            ),
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                        ),
+                                        errorBuilder:
+                                            // ignore: non_constant_identifier_names
+                                            (context, error, StackTrace) =>
+                                                Text("An error occurred!"),
                                       ),
                                     ),
-                                  ],
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 5.0,
+                                            color: Colors.grey[400],
+                                            offset: Offset(0, 3))
+                                      ],
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(top: 15, bottom: 5),
                                   child: Text(
-                                    snapshot.data[index].original_title,
+                                    snapshot.data[id].original_title,
                                     style: kMovieTitleName,
                                     textAlign: TextAlign.center,
                                   ),
@@ -235,7 +225,7 @@ class _MovieScreenState extends State<MovieScreen> {
                                       color: Color(0xffFCC419),
                                     ),
                                     Text(
-                                      "${snapshot.data[index].vote_average}",
+                                      "${snapshot.data[id].vote_average}",
                                       style: kVoteAverage,
                                     ),
                                   ],
