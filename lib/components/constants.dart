@@ -12,18 +12,18 @@ const kMovieTitleName = TextStyle(
     fontWeight: FontWeight.w700);
 
 const kVoteAverage = TextStyle(
-    fontSize: 16, fontFamily: "Proxima Nova", fontWeight: FontWeight.w400);
+    fontSize: 12, fontFamily: "Proxima Nova", fontWeight: FontWeight.w400);
 
 const kRateThis = TextStyle(
-    fontSize: 16, fontFamily: "Proxima Nova", fontWeight: FontWeight.w600);
+    fontSize: 12, fontFamily: "Proxima Nova", fontWeight: FontWeight.w600);
 const kCriticReviews = TextStyle(
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: "Proxima Nova",
     fontWeight: FontWeight.w500,
     color: Color(0xFF9A9BB3));
 
 const kNumerator = TextStyle(
-    fontSize: 16, fontFamily: "Proxima Nova", fontWeight: FontWeight.w600);
+    fontSize: 14, fontFamily: "Proxima Nova", fontWeight: FontWeight.w600);
 
 const kMovieNameDetail = TextStyle(
     fontSize: 21,

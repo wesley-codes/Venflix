@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:chips_choice/chips_choice.dart';
+
 import 'package:venflix/Models/trending_Model.dart';
 import 'package:venflix/Networking/getImage.dart';
 import 'package:venflix/Screens/Movie_details.dart';
@@ -31,7 +31,7 @@ class _MovieScreenState extends State<MovieScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 10,
+      length: 3,
       child: Scaffold(
         backgroundColor: Colors.white,
         key: _scaffoldKey,
@@ -69,27 +69,6 @@ class _MovieScreenState extends State<MovieScreen> {
               TabBarText(
                 title: "Comedy",
               ),
-              Tab(
-                text: "nnoij",
-              ),
-              Tab(
-                text: "nnoij",
-              ),
-              Tab(
-                text: "nnoij",
-              ),
-              Tab(
-                text: "nnoij",
-              ),
-              Tab(
-                text: "nnoij",
-              ),
-              Tab(
-                text: "nnoij",
-              ),
-              Tab(
-                text: "nnoij",
-              ),
             ],
             isScrollable: true,
             labelColor: Colors.black,
@@ -98,7 +77,7 @@ class _MovieScreenState extends State<MovieScreen> {
             indicatorPadding: EdgeInsets.only(bottom: 20),
           ),
         ),
-        body: Column(
+        body: ListView(
           children: [
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -132,15 +111,16 @@ class _MovieScreenState extends State<MovieScreen> {
                 ],
               ),
             ),
-            Expanded(
-              child: FutureBuilder<List<PopularMoviesModel>>(
-                future: popularMovies,
-                // ignore: missing_return
-                builder:
-                    // ignore: missing_return
-                    (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
+            FutureBuilder<List<PopularMoviesModel>>(
+              future: popularMovies,
+              // ignore: missing_return
+              builder:
+                  // ignore: missing_return
+                  (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  return Container(
+                    height: 550,
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int id) {
@@ -235,12 +215,12 @@ class _MovieScreenState extends State<MovieScreen> {
                           ),
                         );
                       },
-                    );
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
+                    ),
+                  );
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ],
         ),

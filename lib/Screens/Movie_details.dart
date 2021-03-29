@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:venflix/Models/moviemodel.dart';
-import 'package:venflix/Models/trending_Model.dart';
+
 import 'package:venflix/Networking/Services.dart';
 import 'package:venflix/Networking/getImage.dart';
 
@@ -37,6 +37,40 @@ class _MovieDetailState extends State<MovieDetail> {
     super.initState();
   }
 
+  Widget _layoutDetails() {
+    Orientation orientation = MediaQuery.of(context).orientation;
+
+    if (orientation == Orientation.portrait) {
+      return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(
+                widget.snapshotImage,
+              ),
+              fit: BoxFit.fill),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(50),
+          ),
+        ),
+        height: MediaQuery.of(context).size.height * 0.75,
+      );
+    } else {
+      return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(
+                widget.snapshotImage,
+              ),
+              fit: BoxFit.fill),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(50),
+          ),
+        ),
+        height: MediaQuery.of(context).size.height * 1.5,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,18 +84,7 @@ class _MovieDetailState extends State<MovieDetail> {
                 children: [
                   Stack(
                     children: [
-                      Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                  widget.snapshotImage,
-                                ),
-                                fit: BoxFit.fill),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(50),
-                            ),
-                          ),
-                          height: MediaQuery.of(context).size.height * 0.75),
+                      _layoutDetails(),
                       Positioned(
                         top: 20,
                         child: IconButton(
